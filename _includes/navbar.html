@@ -1,24 +1,23 @@
 <nav class="navbar">
+    {%- assign default_paths = site.pages | map: "path" -%}
+    {%- assign page_paths = site.header_pages | default: default_paths -%}
     <ul class="navbar-list" >
         <li class="navbar-list-item">
-            <a href="/" className="navbar-list-item-link">
+            <a href="{{ '/' | relative_url }}" className="navbar-list-item-link">
                 Home
             </a>
-        </li>
-        <li class="navbar-list-item">
-            <a href="/genericbot" className="navbar-list-item-link">
-                GenericBot
-            </a>
-        </li>
-        <li class="navbar-list-item">
-            <a href="/cdn" className="navbar-list-item-link">
-                CDN
-            </a>
-        </li>
-        <li class="navbar-list-item">
-            <a href="/projects" className="navbar-list-item-link">
-                Other Projects
-            </a>
-        </li>
+        </li>  
+        {%- if page_paths -%}
+            {%- for path in page_paths -%}
+                {%- assign my_page = site.pages | where: "path", path | first -%}
+                {%- if my_page.title -%}
+                <li class="navbar-list-item">
+                    <a href="{{ my_page.url | relative_url }}" className="navbar-list-item-link">
+                        {{ my_page.title | escape }}
+                    </a>
+                </li>       
+                {%- endif -%}
+            {%- endfor -%}
+        {%- endif -%}
     </ul>
 </nav>
