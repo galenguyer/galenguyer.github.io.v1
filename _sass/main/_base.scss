@@ -17,3 +17,33 @@ section, summary, time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+p, ul, ol, dl, table {
+	margin-bottom: 1em;
+}
+body {
+	line-height: 1;
+	font-size: 10pt;
+    background: #293136;
+}
+*, ::before, ::after {
+	box-sizing: inherit;
+}
+ol, ul {
+	list-style: none;
+}
+
+#container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-bottom: 4em;
+}
+@media screen and (max-width: 1280px) {
+	#container {
+		width: 90%;
+	}
+}
