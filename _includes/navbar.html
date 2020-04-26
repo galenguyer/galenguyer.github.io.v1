@@ -6,7 +6,7 @@
             <a href="{{ '/' | relative_url }}" className="navbar-list-item-link">
                 Home
             </a>
-        </li>  
+        </li>
         {%- if page_paths -%}
             {%- for path in page_paths -%}
                 {%- assign my_page = site.pages | where: "path", path | first -%}
