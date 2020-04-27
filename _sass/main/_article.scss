@@ -10,6 +10,15 @@ article {
     font-family:'Raleway', sans-serif;
     font-weight: 300;
 }
+article h1 {
+    padding-bottom: 0.25em;
+    font-size: 2em;
+    font-weight: 400;
+}
+article h2 {
+    font-size: 1.2em;
+    font-weight: 300;
+}
 article h3 {
     padding-bottom: 1em;
     border-bottom: solid 2px rgba(255, 255, 255, 0.125);
@@ -31,4 +40,18 @@ article a {
 article a:hover {
     border-bottom-color: transparent;
     color: #ffffff !important;
+}
+
+article code {
+    background: rgba(255, 255, 255, 0.025);
+    border-radius: 5px;
+    border: solid 2px rgba(255, 255, 255, 0.125);
+    font-family: "Courier New", monospace;
+    font-size: 0.9em;
+    margin: 0 0.25em;
+    padding: 0.25em 0.65em;
+}
+article hr {
+    margin-bottom: 2em;
+    border-bottom: solid 2px rgba(255, 255, 255, 0.125);
 }
