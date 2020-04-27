@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/mastrchefrocks
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://galenguyer.com
+  * I am mastrchefrocks (https://keybase.io/mastrchefrocks) on keybase.
+  * I have a public key ASDh4kUi3wPELB-LgQb1hc55Lnqy5hyFKHZnh90CUt4orAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01205dca8649fef06514f807f1930be48421aa43ba29978789caff66b603349c090c0a",
+      "host": "keybase.io",
+      "kid": "0120e1e24522df03c42c1f8b8106f585ce792e7ab2e61c8528766787dd0252de28ac0a",
+      "uid": "6a8ac325f14fc6c3dce2280cdbd28019",
+      "username": "mastrchefrocks"
+    },
+    "merkle_root": {
+      "ctime": 1577131119,
+      "hash": "298f03cca7d58d56d52260ecd67c86468461bf432256597fe01a3088e38fa39763696adc9d962a5279721b4f1d5f49157f339f23fe3c163b08dbe2766e778c8a",
+      "hash_meta": "d2386ccdb9e763879f945d79446f083e0c1b260eb4fd1a0400650ef56bdbcaf7",
+      "seqno": 13922002
+    },
+    "service": {
+      "entropy": "ZEpGddTeLxCpVw05TjsnRF93",
+      "hostname": "galenguyer.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.1.1"
+  },
+  "ctime": 1577131130,
+  "expire_in": 504576000,
+  "prev": "efe59b761a16593961c0c3c04e4f09d6fc8191255765b870f02c0cef410c914e",
+  "seqno": 70,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg4eJFIt8DxCwfi4EG9YXOeS56suYchSh2Z4fdAlLeKKwKp3BheWxvYWTESpcCRsQg7+WbdhoWWTlhwMPATk8J1vyBkSVXZbhw8CwM70EMkU7EIPkpVb8+cVn9PNK1MHtqFNoEzkRjTDb79iKwo4S2CHMwAgHCo3NpZ8RA5oI07LmNho/uD3ButmNnVNR9tLzVdliG97jP+ZJhD2n4noFBvLFObBOQwmCx+Fdl8qFqcn9uk+LjPcRw+ZjTBKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIIt+7f+AH7nlRL9qgDqt/cJRbUI/4GqIAKXopiVmNBECo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/mastrchefrocks
+
+==================================================================
