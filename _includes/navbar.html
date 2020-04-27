@@ -1,24 +1,38 @@
 <nav class="navbar">
-    {%- assign default_paths = site.pages | map: "path" -%}
-    {%- assign page_paths = site.header_pages | default: default_paths -%}
     <ul class="navbar-list" >
         <li class="navbar-list-item">
+            {% if page.id == "index" %}
+            <a class="navbar-list-item-link active">
+            {% else %}
             <a href="{{ '/' | relative_url }}" className="navbar-list-item-link">
+            {% endif %}
                 Home
             </a>
         </li>
         <li class="navbar-list-item">
-            <a href="{{ '/genericbot' | relative_url }}" className="navbar-list-item-link">
+            {% if page.id == "genericbot" %}
+            <a class="navbar-list-item-link active">
+            {% else %}
+            <a href="{{ '/genericbot/' | relative_url }}" className="navbar-list-item-link">
+            {% endif %}
                 GenericBot
             </a>
         </li>
         <li class="navbar-list-item">
+            {% if page.id == "cdn" %}
+            <a class="navbar-list-item-link active">
+            {% else %}
             <a href="{{ '/cdn' | relative_url }}" className="navbar-list-item-link">
+            {% endif %}
                 CDN
             </a>
         </li>
         <li class="navbar-list-item">
-            <a href="{{ 'projects' | relative_url }}" className="navbar-list-item-link">
+            {% if page.id == "projects" %}
+            <a class="navbar-list-item-link active">
+            {% else %}
+            <a href="{{ '/projects' | relative_url }}" className="navbar-list-item-link">
+            {% endif %}
                 Other Projects
             </a>
         </li>

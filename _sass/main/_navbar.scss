@@ -1,13 +1,13 @@
 .navbar {
     position: relative;
-    height: 5em;
     background: #445058;
     cursor: default;
 }
 .navbar > ul {
 	list-style: none;
 	text-align: center;
-	padding-left: 0;
+    padding-left: 0;
+    margin: 0;
 }
 
 .navbar > ul > li {
@@ -34,4 +34,10 @@
 
 .navbar > ul > li:hover {
     background: rgba(255, 255, 255, 0.05);
+}
+
+.navbar .active {
+    background: #3a444a;
+    border-top: 4px solid #61a8df;
+	color: #fff;
 }
