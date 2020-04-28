@@ -4,12 +4,14 @@
     text-align: center;
     color: #FFF;
     margin-top: 1rem;
+
     .bars {
         position: relative;
         display: inline-block;
         padding: 0 6em 0 6em;
         box-shadow: 0px 1px 0px #445058, 0px -1px 0px #445058;
         height: 10px;
+
         .name {
             position: relative;
             display: inline;
@@ -21,6 +23,7 @@
             font-weight: 700;
             background: #293136;
             color: #FFF;
+
             a {
                 cursor: pointer;
                 border-bottom-color: transparent;
@@ -31,10 +34,12 @@
                 -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
                 transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
             }
-            a:hover{
+
+            a:hover {
                 border-bottom: dotted 1px rgba(255, 255, 255, 0.35);
             }
         }
+
         .description {
             display: block;
             margin-top: -0.25em;
