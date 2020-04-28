@@ -1,7 +1,10 @@
----
-layout: default
----
-
-<div class="home">
-  {{ content }}
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html %}
+  <body>
+    <main class="wrapper" id="container">
+      {% include header.html -%}
+      {{ content }}
+    </main>
+  </body>
+</html>

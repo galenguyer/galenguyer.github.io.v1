@@ -1,40 +1,36 @@
 <nav class="navbar">
     <ul>
         <li>
-            {% if page.id == "index" %}
+            {% if page.id == "index" -%}
             <a class="active">
-            {% else %}
+            {%- else -%}
             <a href="{{ '/' | relative_url }}">
-            {% endif %}
-                Home
-            </a>
+            {%- endif -%}
+            Home</a>
         </li>
         <li>
-            {% if page.id == "genericbot" %}
+            {% if page.id == "genericbot" -%}
             <a class="active">
-            {% else %}
+            {%- else -%}
             <a href="{{ '/genericbot/' | relative_url }}">
-            {% endif %}
-                GenericBot
-            </a>
+            {%- endif -%}
+            GenericBot</a>
         </li>
         <li>
-            {% if page.id == "cdn" %}
+            {% if page.id == "cdn" -%}
             <a class="active">
-            {% else %}
+            {%- else -%}
             <a href="{{ '/cdn' | relative_url }}">
-            {% endif %}
-                CDN
-            </a>
+            {%- endif -%}
+            CDN</a>
         </li>
         <li>
-            {% if page.id == "projects" %}
+            {% if page.id == "projects" -%}
             <a class="active">
-            {% else %}
+            {%- else -%}
             <a href="{{ '/projects' | relative_url }}">
-            {% endif %}
-                Other Projects
-            </a>
+            {%- endif -%}
+            Other Projects</a>
         </li>
     </ul>
 </nav>

@@ -1,11 +1,11 @@
 <div class="brand">
     <div class="bars">
         <h1 class="name">
-            {% if page.id == "index" %}
+            {%- if page.id == "index" -%}
             <span>Galen Guyer</span>
-            {% else %}
+            {%- else -%}
             <a href="{{ '/' | relative_url}}">Galen Guyer</a>
-            {% endif %}
+            {%- endif -%}
         </h1>
         <span class="description">Full-Stack Software Engineer</span>
     </div>
