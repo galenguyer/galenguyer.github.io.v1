@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.galenguyer.com/assets/css/book.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="code.css" media="screen" />
+    <title>Install Plex on Ubuntu 18.04</title>
+</head>
+
+<body>
+    <article>
+        <h1>Install Plex on Ubuntu 18.04</h1>
+        <hr>
+        <ol>
+            <li>
+                <p>Import the repository's GPG key</p>
+                <pre>curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -</pre>
+            </li>
+            <li>
+                <p>Add the Plex APT repository to your system's software repository list </p>
+                <pre>echo deb https://downloads.plex.tv/repo/deb public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list</pre>
+            </li>
+            <li>
+                <p>Install prerequisites and plex packages</p>
+                <pre>sudo apt install apt-transport-https
+sudo apt update
+sudo apt install plexmediaserver</pre>
+            </li>
+            <li>
+                <p>Adjust firewall rules</p>
+                <p>Edit the application profile</p>
+                <pre><b>/etc/ufw/applications.d/plexmediaserver</b>
+                <hr>
+[plexmediaserver]
+title=Plex Media Server (Standard)
+description=The Plex Media Server
+ports=32400/tcp|3005/tcp|5353/udp|8324/tcp|32410:32414/udp
+
+[plexmediaserver-dlna]
+title=Plex Media Server (DLNA)
+description=The Plex Media Server (additional DLNA capability only)
+ports=1900/udp|32469/tcp
+
+[plexmediaserver-all]
+title=Plex Media Server (Standard + DLNA)
+description=The Plex Media Server (with additional DLNA capability)
+ports=32400/tcp|3005/tcp|5353/udp|8324/tcp|32410:32414/udp|1900/udp|32469/tcp</pre>
+                <p>Update UFW rules</p>
+                <pre>sudo ufw app update plexmediaserver
+sudo ufw allow plexmediaserver-all
+sudo ufw status verbose</pre>
+            </li>
+            <li>
+                <p>Configure Plex</p>
+                <pre>sudo mkdir -p /opt/plexmedia/{movies,series}
+sudo chown -R plex: /opt/plexmedia</pre>
+                <p>If you are installing plex on a remote machine, create an SSH tunnel, as plex only allows setup from local IPs</p>
+                <pre>ssh [Server IP] -L 32400:localhost:32400</pre>
+                <p>Navigate to <a href="http://localhost:32400/web">http://localhost:32400/web</a> and follow the steps given. Ensure you check the box that says <i>Allow me to access my media outside my home</i></p>
+                <p>Once you have completed setup, you can access your server from <a href="https://app.plex.tv">https://app.plex.tv</a></p>
+            </li>
+        </ol>
+        <hr>
+        <p>If you need to re-configure the server, run the following commands and re-do the Configuring Plex step</p>
+        <pre>sudo rm /var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/Preferences.xml
+sudo systemctl restart plexmediaserver</pre>
+        <hr>
+    </article>
+</body>
+
+</html>
