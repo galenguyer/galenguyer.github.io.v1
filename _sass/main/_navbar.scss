@@ -1,43 +1,45 @@
 .navbar {
     position: relative;
     background: #445058;
-    cursor: default;
-}
-.navbar > ul {
-	list-style: none;
-	text-align: center;
-    padding-left: 0;
-    margin: 0;
-}
 
-.navbar > ul > li {
-	display: inline-block;
-    padding-left: 0;
-    -moz-transition: background-color 0.2s ease-in-out;
-    -webkit-transition: background-color 0.2s ease-in-out;
-    -ms-transition: background-color 0.2s ease-in-out;
-    transition: background-color 0.2s ease-in-out;
-}
+    ul {
+        list-style: none;
+        text-align: center;
+        padding-left: 0;
+        margin: 0;
 
-.navbar > ul > li > a {
-    display: inline-block;
-    margin: 0;
-    padding: 1.0em 1.6em 1.7em 1.6em;
-    letter-spacing: 0.06em;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.2em;
-    outline: 0;
-    color: rgba(255, 255, 255, 0.75);
-    border-top: 5px solid transparent;
-}
+        li {
+            display: inline-block;
+            padding-left: 0;
+            -moz-transition: background-color 0.2s ease-in-out;
+            -webkit-transition: background-color 0.2s ease-in-out;
+            -ms-transition: background-color 0.2s ease-in-out;
+            transition: background-color 0.2s ease-in-out;
 
-.navbar > ul > li:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
+            a {
+                display: inline-block;
+                margin: 0;
+                padding: 1.0em 1.6em 1.7em 1.6em;
+                letter-spacing: 0.06em;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 1.2em;
+                outline: 0;
+                color: rgba(255, 255, 255, 0.75);
+                border-top: 5px solid transparent;
+            }
 
-.navbar .active {
-    background: #3a444a;
-    border-top: 4px solid #61a8df;
-	color: #fff;
+        }
+
+        li:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+    }
+
+    .active {
+        background: #3a444a;
+        border-top: 4px solid #61a8df;
+        color: #fff;
+    }
 }

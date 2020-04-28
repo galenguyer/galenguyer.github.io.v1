@@ -1,37 +1,37 @@
 <nav class="navbar">
-    <ul class="navbar-list" >
-        <li class="navbar-list-item">
+    <ul>
+        <li>
             {% if page.id == "index" %}
-            <a class="navbar-list-item-link active">
+            <a class="active">
             {% else %}
-            <a href="{{ '/' | relative_url }}" className="navbar-list-item-link">
+            <a href="{{ '/' | relative_url }}">
             {% endif %}
                 Home
             </a>
         </li>
-        <li class="navbar-list-item">
+        <li>
             {% if page.id == "genericbot" %}
-            <a class="navbar-list-item-link active">
+            <a class="active">
             {% else %}
-            <a href="{{ '/genericbot/' | relative_url }}" className="navbar-list-item-link">
+            <a href="{{ '/genericbot/' | relative_url }}">
             {% endif %}
                 GenericBot
             </a>
         </li>
-        <li class="navbar-list-item">
+        <li>
             {% if page.id == "cdn" %}
-            <a class="navbar-list-item-link active">
+            <a class="active">
             {% else %}
-            <a href="{{ '/cdn' | relative_url }}" className="navbar-list-item-link">
+            <a href="{{ '/cdn' | relative_url }}">
             {% endif %}
                 CDN
             </a>
         </li>
-        <li class="navbar-list-item">
+        <li>
             {% if page.id == "projects" %}
-            <a class="navbar-list-item-link active">
+            <a class="active">
             {% else %}
-            <a href="{{ '/projects' | relative_url }}" className="navbar-list-item-link">
+            <a href="{{ '/projects' | relative_url }}">
             {% endif %}
                 Other Projects
             </a>
