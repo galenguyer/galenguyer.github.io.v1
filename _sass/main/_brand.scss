@@ -4,45 +4,44 @@
     text-align: center;
     color: #FFF;
     margin-top: 1rem;
-}
-.brand-bars {
-    position: relative;
-    display: inline-block;
-    padding: 0 6em 0 6em;
-    box-shadow: 0px 1px 0px #445058, 0px -1px 0px #445058;
-    height: 10px;
-}
-.brand-name {
-    position: relative;
-    display: inline;
-    padding: 0em 0.50em;
-    top: -0.40em;
-    text-transform: uppercase;
-    font-size: 3em;
-    letter-spacing: 3px;
-    font-weight: 700;
-    background: #293136;
-    color: #FFF;
-}
-.brand-name a {
-    cursor: pointer;
-    border-bottom-color: transparent;
-    text-decoration: none;
-    color: #ffffff;
-    -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-}
-.brand-name a:hover{
-    border-bottom: dotted 1px rgba(255, 255, 255, 0.35);
-}
-
-.brand-description {
-    display: block;
-    margin-top: -0.25em;
-    letter-spacing: 0.07em;
-    font-size: 1.1em;
-    color: #888;
-    color: rgba(255, 255, 255, 0.5);
+    .bars {
+        position: relative;
+        display: inline-block;
+        padding: 0 6em 0 6em;
+        box-shadow: 0px 1px 0px #445058, 0px -1px 0px #445058;
+        height: 10px;
+        .name {
+            position: relative;
+            display: inline;
+            padding: 0em 0.50em;
+            top: -0.40em;
+            text-transform: uppercase;
+            font-size: 3em;
+            letter-spacing: 3px;
+            font-weight: 700;
+            background: #293136;
+            color: #FFF;
+            a {
+                cursor: pointer;
+                border-bottom-color: transparent;
+                text-decoration: none;
+                color: #ffffff;
+                -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+                -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+                -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+                transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            }
+            a:hover{
+                border-bottom: dotted 1px rgba(255, 255, 255, 0.35);
+            }
+        }
+        .description {
+            display: block;
+            margin-top: -0.25em;
+            letter-spacing: 0.07em;
+            font-size: 1.1em;
+            color: #888;
+            color: rgba(255, 255, 255, 0.5);
+        }
+    }
 }
