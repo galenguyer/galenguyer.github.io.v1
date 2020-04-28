@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 article {
 	position: relative;
 	padding: 6em;
@@ -54,4 +54,8 @@ article code {
 article hr {
     margin-bottom: 2em;
     border-bottom: solid 2px rgba(255, 255, 255, 0.125);
+}
+
+article b {
+    font-weight: 600;
 }
