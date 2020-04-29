@@ -3,26 +3,18 @@ permalink: /404
 layout: default
 ---
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-    font-family: sans-serif;
-    color: white;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
+<article style="text-align: center;">
+    <h1>404</h1>
 
-</style>
-
-<div class="container">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+    <p><strong>Page not found :(</strong></p>
+    <p>The requested page could not be found. We're checking for the reason now...</p>
+    <p id='reason'><span style="color: #3a444a">placeholder</span><noscript>It looks like it's because we can't run JavaScript on this page. Well, not really. But that's certainly making this page a lot less fun.</noscript></p>
+</article>
+<script>
+  fetch("/assets/excuses.json")
+  .then(response => response.json())
+  .then(data => {
+    excuse = data[Math.floor(Math.random() * data.length)];
+    document.getElementById('reason').innerText = ("It looks like it's because " + excuse);
+  });
+</script>
