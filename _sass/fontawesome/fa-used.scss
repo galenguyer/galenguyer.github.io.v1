@@ -1,0 +1,48 @@
+/*!
+ * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
+//@import 'variables'; 
+$fa-font-path:         "../webfonts" !default;
+$fa-font-size-base:    16px !default;
+$fa-font-display:      block !default;
+$fa-css-prefix:        fa !default;
+$fa-version:           "5.13.0" !default;
+$fa-border-color:      #eee !default;
+$fa-inverse:           #fff !default;
+$fa-li-width:          2em !default;
+$fa-fw-width:          (20em / 16);
+$fa-primary-opacity:   1 !default;
+$fa-secondary-opacity: .4 !default;
+
+// Convenience function used to set content property
+@function fa-content($fa-var) {
+  @return unquote("\"#{ $fa-var }\"");
+}
+$fa-var-github: \f09b;
+$fa-var-github-alt: \f113;
+$fa-var-github-square: \f092;
+$fa-var-linkedin: \f08c;
+$fa-var-linkedin-in: \f0e1;
+$fa-var-envelope: \f0e0;
+//end @import 'variables';
+//@import 'icons';
+.#{$fa-css-prefix}-github:before { content: fa-content($fa-var-github); }
+.#{$fa-css-prefix}-github-alt:before { content: fa-content($fa-var-github-alt); }
+.#{$fa-css-prefix}-github-square:before { content: fa-content($fa-var-github-square); }
+.#{$fa-css-prefix}-linkedin:before { content: fa-content($fa-var-linkedin); }
+.#{$fa-css-prefix}-linkedin-in:before { content: fa-content($fa-var-linkedin-in); }
+.#{$fa-css-prefix}-envelope:before { content: fa-content($fa-var-envelope); }
+//end @import 'icons';
+
+@import 'mixins';
+@import 'core';
+@import 'larger';
+@import 'fixed-width';
+@import 'list';
+@import 'bordered-pulled';
+@import 'animated';
+@import 'rotated-flipped';
+@import 'stacked';
+@import 'screen-reader';
