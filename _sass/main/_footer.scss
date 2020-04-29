@@ -12,7 +12,6 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-
     a {
         -moz-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
         -webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
@@ -21,10 +20,13 @@ footer {
         color: #bec9cf;
         text-decoration: none;
         border: 2.4px solid rgba(255, 255, 255, 0.2);
-        border-radius: 36px;
+        border-radius: 48px;
         padding: 12px 24px;
         margin: 18px 24px;
         text-align: center;
+        .val {
+            vertical-align: 2px;
+        }
     }
     a:hover {
         color: #ffffff !important;

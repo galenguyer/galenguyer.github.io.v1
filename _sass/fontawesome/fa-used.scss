@@ -29,3 +29,16 @@ $fa-var-envelope: \f0e0;
 .#{$fa-css-prefix}-linkedin:before { content: fa-content($fa-var-linkedin); }
 .#{$fa-css-prefix}-envelope:before { content: fa-content($fa-var-envelope); }
 //end @import 'icons';
+
+@font-face {
+  font-family: 'Font Awesome 5 Compact';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/fa-compact.woff2') format('woff2');
+}
+
+.fab, .fas {
+  font-family: 'Font Awesome 5 Compact';
+  font-weight: 400;
+}
