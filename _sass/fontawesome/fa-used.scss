@@ -21,28 +21,11 @@ $fa-secondary-opacity: .4 !default;
   @return unquote("\"#{ $fa-var }\"");
 }
 $fa-var-github: \f09b;
-$fa-var-github-alt: \f113;
-$fa-var-github-square: \f092;
 $fa-var-linkedin: \f08c;
-$fa-var-linkedin-in: \f0e1;
 $fa-var-envelope: \f0e0;
 //end @import 'variables';
 //@import 'icons';
 .#{$fa-css-prefix}-github:before { content: fa-content($fa-var-github); }
-.#{$fa-css-prefix}-github-alt:before { content: fa-content($fa-var-github-alt); }
-.#{$fa-css-prefix}-github-square:before { content: fa-content($fa-var-github-square); }
 .#{$fa-css-prefix}-linkedin:before { content: fa-content($fa-var-linkedin); }
-.#{$fa-css-prefix}-linkedin-in:before { content: fa-content($fa-var-linkedin-in); }
 .#{$fa-css-prefix}-envelope:before { content: fa-content($fa-var-envelope); }
 //end @import 'icons';
-
-@import 'mixins';
-@import 'core';
-@import 'larger';
-@import 'fixed-width';
-@import 'list';
-@import 'bordered-pulled';
-@import 'animated';
-@import 'rotated-flipped';
-@import 'stacked';
-@import 'screen-reader';
