@@ -12,7 +12,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    a {
+    .card {
         -moz-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
         -webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
         -ms-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
@@ -28,9 +28,28 @@ footer {
             vertical-align: 2px;
         }
     }
-    a:hover {
+    .card:hover {
         color: #ffffff !important;
         background-color: rgb(67, 74, 80);
         border-color: rgba(255, 255, 255, 0.3);
+    }
+    .copy {
+        color: #bec9cf;
+        text-decoration: none;
+        margin: 8px;
+        text-align: center;
+        a {
+            -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+            border-bottom: dotted 1px rgba(255, 255, 255, 0.35);
+            color: #bec9cf;
+            text-decoration: none;
+        }
+        a:hover {
+            border-bottom-color: transparent;
+            color: #ffffff !important;
+        }
     }
 }
