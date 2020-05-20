@@ -10,7 +10,7 @@ layout: default
         {{ page.date | date: date_format }}
       </time>
       {%- if page.author -%}
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="post-author" itemprop="name">{{ page.author }}</span></span>
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="post-author" itemprop="name"> - by <b>{{ page.author }}</b></span></span>
       {%- endif -%}
     </p>
   </header>
