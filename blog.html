@@ -1,0 +1,20 @@
+---
+title: Galen's Bloggy Stuff
+permalink: /blog/
+layout: default
+---
+
+
+<article>
+    <h1>Galen's Bloggy Stuff</h1>
+    <br>
+    <h3>I write about things I do sometimes. Here's where you'll find most of them</h3>
+    <br>
+    <ul>
+        {% for post in site.posts %}
+        <li>
+            {{ post.date | date: '%B %d, %Y' }}: <a href="{{ post.url }}">{{ post.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</article>
