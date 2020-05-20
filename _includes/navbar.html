@@ -32,5 +32,13 @@
             {%- endif -%}
             Other Projects</a>
         </li>
+        <li>
+            {% if page.id == "blog" -%}
+            <a class="active">
+            {%- else -%}
+            <a href="{{ '/blog' | relative_url }}">
+            {%- endif -%}
+            Blog</a>
+        </li>
     </ul>
 </nav>
