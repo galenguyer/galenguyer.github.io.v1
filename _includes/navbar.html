@@ -20,7 +20,7 @@
             {% if page.id == "cdn" -%}
             <a class="active">
             {%- else -%}
-            <a href="{{ '/cdn' | relative_url }}">
+            <a href="{{ '/cdn/' | relative_url }}">
             {%- endif -%}
             CDN</a>
         </li>
@@ -28,7 +28,7 @@
             {% if page.id == "projects" -%}
             <a class="active">
             {%- else -%}
-            <a href="{{ '/projects' | relative_url }}">
+            <a href="{{ '/projects/' | relative_url }}">
             {%- endif -%}
             Other Projects</a>
         </li>
@@ -36,7 +36,7 @@
             {% if page.id == "blog" -%}
             <a class="active">
             {%- else -%}
-            <a href="{{ '/blog' | relative_url }}">
+            <a href="{{ '/blog/' | relative_url }}">
             {%- endif -%}
             Blog</a>
         </li>
