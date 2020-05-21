@@ -34,6 +34,25 @@ google_analytics: "UA-164776371-1"
 # Build settings
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
+
+defaults:
+  -
+    scope:
+      path:            "cabinpressure/*"
+    values:
+      sitemap:         false
+  -
+    scope:
+      path:            "hfy/*"
+    values:
+      sitemap:         false
+  -
+    scope:
+      path:            "howto/*"
+    values:
+      sitemap:         false
+            
 
 # Exclude from processing.
 # The following items will not be processed, by default.
