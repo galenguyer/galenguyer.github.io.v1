@@ -6,7 +6,7 @@ author: Galen Guyer
 categories: [docker, rust]
 ---
 
-<p>Today, a friend posted in Slack the following snippet:</p>
+<p>Today, a friend posted the following snippet in Slack:</p>
 <pre> [~/Documents/shelflife] [±docker✗] $ docker run -v -it --rm --name my-running-app shelflife-rust-docker
     Error: NotPresent</pre>
 <p>The first guess was they deleted the docker image and forgot to rebuild it. That wasn't the case, leading me to dive into this cryptic error message that we assumed some some hidden Rust or Docker error. We weren't able to find any example of this error message for Rust or Docker online, so I knew this would be a fun challenge.</p>
