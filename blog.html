@@ -11,10 +11,13 @@ id: blog
     <br>
     <h3>I write about things I do sometimes. Here's where you'll find most of them</h3>
     <br>
+    <br>
     <ul>
         {% for post in site.posts %}
         <li>
             {{ post.date | date: '%B %d, %Y' }}: <a href="{{ post.url }}">{{ post.title }}</a>
+            <br>
+            <br>
         </li>
         {% endfor %}
     </ul>
