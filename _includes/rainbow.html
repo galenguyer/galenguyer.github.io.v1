@@ -1,0 +1,24 @@
+<div id="rainbow">
+    <noscript>
+        <span class="color" style="background-color: #FF0018;"></span>
+        <span class="color" style="background-color: #FFA52C;"></span>
+        <span class="color" style="background-color: #FFFF41;"></span>
+        <span class="color" style="background-color: #008018;"></span>
+        <span class="color" style="background-color: #0000F9;"></span>
+        <span class="color" style="background-color: #86007D;"></span>  
+    </noscript>
+</div>
+<script>
+    const flags = [
+    ["#FF0018", "#FFA52C", "#FFFF41", "#008018", "#0000F9", "#86007D"],
+        ["#000000", "#a3a3a3", "#FFFFFF", "#800080"],
+        ["#9c5cd4", "#fcfcfc", "#fcf434", "#2c2c2c"]
+    ];
+    const flagToUse=flags[Math.floor(Math.random()*flags.length)];
+    flagToUse.forEach(color => {
+        var div = document.createElement("div");
+        div.className = "color";
+        div.style.background = color;
+        document.getElementById("rainbow").appendChild(div);
+    })
+</script>
