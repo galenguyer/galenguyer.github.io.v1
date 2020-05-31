@@ -49,3 +49,11 @@
         background: #006cbe;
     }
 }
+@media screen and (max-width: 1070px) {
+    .whoami {
+        padding: 2em;
+        .description {
+            font-size: 1rem;
+        }
+    }
+}
