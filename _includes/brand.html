@@ -1,12 +1,10 @@
 <div class="brand">
-    <div class="bars">
         <h1 class="name">
-            {%- if page.id == "index" -%}
-            <span>Galen Guyer</span>
-            {%- else -%}
-            <a href="{{ '/' | relative_url}}">Galen Guyer</a>
-            {%- endif -%}
-        </h1>
-        <span class="description">Full-Stack Software Engineer</span>
-    </div>
+        {%- if page.id == "index" -%}
+        <span>Galen Guyer</span>
+        {%- else -%}
+        <a href="{{ '/' | relative_url}}">Galen Guyer</a>
+        {%- endif -%}
+    </h1>
+    <span class="description">Full-Stack Software Engineer</span>
 </div>
