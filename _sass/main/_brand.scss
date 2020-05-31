@@ -45,3 +45,18 @@
         }
     }
 }
+
+
+@media screen and (max-width: 1280px) {
+    .brand {
+        margin-top: 0px;
+        padding: 1em 0px 3em 0px;
+        .bars {
+            padding: 0px;
+            box-shadow: none;
+            .name {
+                font-size: 2em;
+            }
+        }
+    }
+}
