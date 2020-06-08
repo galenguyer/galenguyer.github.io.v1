@@ -57,7 +57,7 @@
             function generateSmash(length) {
                 length -= 2;
                 var result = 'as';
-                var keys = ['a', 's', 'd', 'f', 'j', 'k', 'l', ';'];
+                var keys = ['a', 's', 'd', 'f', 'j', 'k', 'l', 'a', 's', 'd', 'f', 'j', 'k', 'l', ';'];
                 while (length > 0) {
                     length -= 1;
                     keys = keys.filter(k => k != result.slice(-1));
