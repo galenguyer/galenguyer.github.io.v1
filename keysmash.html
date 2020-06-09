@@ -25,22 +25,32 @@
             font-weight: 300;
         }
 
+        #buttons {
+            display: inline-flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         button {
             background: inherit;
-            color: inherit;
-            border: 1.5px solid rgb(248, 248, 242);
+            color: rgba(248, 248, 242, 0.6);
+            border: 1px solid rgba(248, 248, 242, 0.6);
             border-radius: 16px;
             padding: 12px 16px 14px 16px;
+            margin: 0px 10px 12px 10px;
             line-height: 100%;
             font-weight: 200;
-            -moz-transition: background-color 0.2s ease-in-out;
-            -webkit-transition: background-color 0.2s ease-in-out;
-            -ms-transition: background-color 0.2s ease-in-out;
-            transition: background-color 0.2s ease-in-out;
+            flex: none;
+            -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
         }
 
         button:hover {
             background: rgba(248, 248, 242, 0.1);
+            color: rgba(248, 248, 242, 0.8);
+            border: 1px solid rgba(248, 248, 242, 0.8);
         }
     </style>
 </head>
@@ -52,7 +62,10 @@
         <p id='keysmash'>
             <noscript>you need to enable javascript for this to work!</noscript>
         </p>
-        <button onclick="generateSmash(18 + (Math.floor(Math.random()*24)));">generate a new one</button>
+        <div id='buttons'>
+            <button onclick="generateSmash(18 + (Math.floor(Math.random()*24)));">generate a new one</button>
+            <button onclick="copyElementText('keysmash');">copy to clipboard</button>
+        </div>
         <script>
             // Original code in C# by @HOGGARB
             function generateSmash(length) {
@@ -68,6 +81,17 @@
                     keys.push(result.slice(-3).charAt(0));
                 }
                 document.getElementById('keysmash').innerText = result;
+            }
+
+            function copyElementText(id) {
+                var text = document.getElementById(id).innerText;
+                var elem = document.createElement("textarea");
+                document.body.appendChild(elem);
+                elem.value = text;
+                elem.select();
+                elem.setSelectionRange(0, 99999); /*For mobile devices*/
+                document.execCommand("copy");
+                document.body.removeChild(elem);
             }
             generateSmash(18 + (Math.floor(Math.random() * 24)));
         </script>
