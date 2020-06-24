@@ -29,7 +29,6 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://galenguyer.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  galenguyer
 permalink: /blog/:year/:month/:day/:title
-google_analytics: "UA-164776371-1"
 
 # Build settings
 plugins:

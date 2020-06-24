@@ -10,8 +10,8 @@
     <meta name="description" content="{{ page.description }}" />
   {% endif -%}
   
-  {%- if jekyll.environment == 'selfhost' and site.google_analytics -%}
-    {%- include google-analytics.html -%}
+  {%- if jekyll.environment == 'selfhost' -%}
+    {%- include analytics.html -%}
   {%- endif -%}
   
 </head>
