@@ -8,10 +8,5 @@
   {% endif %}
   {%- if page.description -%}
     <meta name="description" content="{{ page.description }}" />
-  {% endif -%}
-  
-  {%- if jekyll.environment == 'selfhost' -%}
-    {%- include analytics.html -%}
-  {%- endif -%}
-  
+  {% endif -%}  
 </head>
