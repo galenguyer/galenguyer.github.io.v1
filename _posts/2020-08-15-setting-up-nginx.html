@@ -1,0 +1,39 @@
+---
+title: "Setting Up and Securing Nginx"
+description: "A quick walkthrough on how to set up nginx to serve a static webpage and securing it with certbot from LetsEncrypt."
+layout: post
+author: Galen Guyer
+categories: [howto, nginx]
+---
+
+<p id="intro">Setting up a website is a good first task for anyone looking to get into server administration. 
+    it requires a basic grasp of Linux concepts like package management, system services, and how to 
+    edit configuration files. This guide will walk you through installing <a href="https://nginx.org/">nginx</a> on Ubuntu or Fedora
+    and securing it with <a href="https://certbot.eff.org/">certbot</a> for HTTPS.
+</p>
+<div id="install">
+    <h3>Installing Nginx and Certbot</h3>
+    <p>The first step will be installing nginx. There are several ways to go about this, so I'll run through them from easiest to hardest.</p>
+    <p>The easiest way to install nginx will be to use the official packages. This can be done with <code>apt install nginx</code> on Ubuntu and Debian or <code>dnf install nginx</code> on Fedora. 
+        However, official repositories are normally a few versions behind. While this isn't necessarily bad, some people (myself included) like 
+        using the newest version for some features that won't be touched on in this guide.</p>
+    <p>The easiest way to install the latest version of nginx will be to use packages I build and maintain. <b>However, this only works on Ubuntu 18+.</b> To get started, first add
+        my <a href="/pubkey.txt">GPG key</a> to apt and then add the package repository I maintain to your apt sources. The easiest way to do this
+        is to run <code>curl -sSL https://packages.galenguyer.com/bootstrap.sh | sh</code>, though if you're 
+        <a href="https://www.idontplaydarts.com/2016/04/detecting-curl-pipe-bash-server-side/">hesitant to pipe from curl to bash</a>, you can download
+        and run the script normally. Finally, install the package you want. Five are provided, with various feature sets. Mainline packages are the latest version of nginx, whereas
+        stable packages use the nginx stable branch, which is slightly behind mainline. Packages with "quiche" in the name have experimental HTTP/3 support enabled, 
+        which I don't reccomend unless you're familiar with nginx and ready to debug it. I would suggest installing the <code>edgeinx-mainline</code> package for the best mix of features and stability.
+        This can be done by simply running <code>apt install edgeinx-mainline</code>. Any time you update your system with apt update or upgrade, it will update this package if a newer version is found as well.
+    </p>
+    <p>The last way to install nginx is build it from source yourself. If you want to do this, I reccomend using <a href="https://cdn.galenguyer.com/txt/build-nginx.sh">this script</a>, 
+        which was originally written by <a href="https://seedno.de">Seednode</a>. You can edit it to change the version of nginx you install and change what features are installed as well. It will also set up default config files
+        and a systemd service for you. I last tested it on Ubuntu 18.04, but it should work on all modern versions of Debian, Ubuntu, and Fedora.
+        Be warned, it will take a long time to run if you don't have a relatively powerful CPU.</p>
+
+    <p>The final thing you'll want to install is certbot-auto. I've found it the easiest way to interact with Let'sEncrypt for certificates. 
+        You can install it by running the following commands:
+        <pre>sudo curl -sSL https://dl.eff.org/certbot-auto -o /usr/local/bin/certbot-auto
+sudo chmod a+x /usr/local/bin/certbot-auto</pre>
+    </p>
+</div>
