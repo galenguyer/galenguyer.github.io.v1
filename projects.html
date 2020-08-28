@@ -7,7 +7,7 @@ id: projects
 ---
 
 <article>
-    <h3 id='fastbin'>FastBin <span class="projlink"><a href="https://fastbin.mastrchef.rocks/">https://fastbin.mastrchef.rocks/</a></span></h2>                               
+    <h3 id='fastbin'>FastBin<!-- <span class="projlink"><a href="https://fastbin.mastrchef.rocks/">https://fastbin.mastrchef.rocks/</a></span>--></h2>                               
     <p>FastBin is a quick project I wrote that provides client-side encryption for text snippets. The name is based off HasteBin and PasteBin, but is a pun on "fasten", meaning "to secure."</p> 
     <p>The backend <a href="https://github.com/galenguyer/FastBin-Server">(source)</a> is super simple. It is just an ASP.NET API that inserts the data it receives into a LiteDB database. The only logic it performs is ensuring the ID is unique by adding a random character if there is a collision.</p>
     <p>The frontend <a href="https://github.com/galenguyer/FastBin-Web">(source)</a> is where the magic happens. There's two sides to the app: submission and retrival. When the content is submitted, the first thing to happen is the SHA-256 hash of the content is taken. The first 8 characters of this make up the primary ID. It'll also serve as the checksum when we're retrieving the data. Next, a random 24-character key is generated. This is used as the encryption key for the snippet. The key is <b>never</b> sent to the server, making it nigh on impossible to be decrypted. The AES-encrypted data, along with the initial ID, is sent to the API server for storage. The server returns the final ID, which may have had some characters added to prevent duplication issues.</p>
