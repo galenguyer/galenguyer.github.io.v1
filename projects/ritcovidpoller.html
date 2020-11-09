@@ -1,0 +1,38 @@
+---
+title: Galen Guyer | RIT COVID Poller
+permalink: /projects/ritcovidpoller
+layout: default
+description:
+    Rochester Institute of Technology doesn't provide access to any historical COVID data, so I wrote an app to scrape that
+    data and save it
+id: ritcovidpoller
+---
+
+<article>
+    <h1 id='project'>RIT COVID Poller
+        <span class="projlink"><a
+                href="https://ritcovidpoller.nyaa.gay/api/v0/history">https://ritcovidpoller.nyaa.gay</a></span>
+    </h1>
+    <p>Tracking and graphing historical data is fun and useful for showing trends in data, but RIT provides no
+        historical data. However, our COVID dashboard only shows immediate numbers, with no ways of tracking or seeing
+        trends. I wrote a Python app that scrapes data in real time from the dashboard and provides an API to access
+        current data in JSON format or historical data. Scraping the site is easy enough, and to make it easier I used
+        code from the <a href="https://github.com/bug-chasers/ritcovid">RIT COVID Tracking Discord Bot</a>, which pulls
+        data in real time from the dashboard for a few Discord servers.</p>
+    <p>Once that data is retrieved, it's inserted into a SQLite database. However, because the dashboard is updated
+        incrementally, when they updated the dashboard I'd get between 2 and 10 new entries in the database. This
+        becomes massively inconvenient, because each day can have multiple entries and it's just messy. To avoid this,
+        every time the database is updated, if there's any previous entries on the same date, those entries are dropped
+        and only the latest entry is retained.</p>
+    <p>Two endpoints are exposed to access this data at the moment, though as the semester changes more may be created.
+        The first is <a href="https://ritcovidpoller.nyaa.gay/api/v0/latest">/api/v0/latest</a>, which simply shows the
+        current state of the dashboard (with a delay of up to 5 minutes) in JSON format for easy consuption by any other
+        apps that don't want to parse the HTML from the page. The other endpoint is <a
+            href="https://ritcovidpoller.nyaa.gay/api/v0/history">/api/v0/history</a>, which contains all the historical
+        data from the semester.</p>
+    <p>For most of the dates in the history endpoint, you'll notice the time is <code>16:00:00</code> on all entries.
+        This is because I wrote the app partway through the semester so I had to backfill it with data that was sourced
+        from the <a href="https://reddit.com/r/rit">r/rit</a> community.</p>
+    <p>As always, the source code for this project is available <a
+            href="https://github.com/galenguyer/rit-covid-poller">on GitHub!</a></p>
+</article>
