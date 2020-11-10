@@ -1,17 +1,17 @@
 ---
 title: Galen Guyer | RIT COVID Poller
-permalink: /projects/ritcovidpoller
+permalink: /projects/rcpoller
 layout: default
 description:
     Rochester Institute of Technology doesn't provide access to any historical COVID data, so I wrote an app to scrape that
     data and save it
-id: ritcovidpoller
+id: rcpoller
 ---
 
 <article>
     <h1 id='project'>RIT COVID Poller
         <span class="projlink"><a
-                href="https://ritcovidpoller.galenguyer.com/api/v0/history">https://ritcovidpoller.galenguyer.com</a></span>
+                href="https://rcpoller.galenguyer.com/api/v0/history">https://rcpoller.galenguyer.com</a></span>
     </h1>
     <p>Tracking and graphing historical data is fun and useful for showing trends in data, but RIT provides no
         historical data. However, our COVID dashboard only shows immediate numbers, with no ways of tracking or seeing
@@ -25,10 +25,10 @@ id: ritcovidpoller
         every time the database is updated, if there's any previous entries on the same date, those entries are dropped
         and only the latest entry is retained.</p>
     <p>Two endpoints are exposed to access this data at the moment, though as the semester changes more may be created.
-        The first is <a href="https://ritcovidpoller.galenguyer.com/api/v0/latest">/api/v0/latest</a>, which simply shows the
+        The first is <a href="https://rcpoller.galenguyer.com/api/v0/latest">/api/v0/latest</a>, which simply shows the
         current state of the dashboard (with a delay of up to 5 minutes) in JSON format for easy consuption by any other
         apps that don't want to parse the HTML from the page. The other endpoint is <a
-            href="https://ritcovidpoller.galenguyer.com/api/v0/history">/api/v0/history</a>, which contains all the historical
+            href="https://rcpoller.galenguyer.com/api/v0/history">/api/v0/history</a>, which contains all the historical
         data from the semester.</p>
     <p>For most of the dates in the history endpoint, you'll notice the time is <code>16:00:00</code> on all entries.
         This is because I wrote the app partway through the semester so I had to backfill it with data that was sourced
