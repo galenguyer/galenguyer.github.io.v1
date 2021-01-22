@@ -1,0 +1,90 @@
+---
+title: Galen Guyer | RIT COVID Dashboard
+permalink: /projects/ritcoviddashboard
+layout: default
+description:
+    Rochester Institute of Technology doesn't provide access to any historical COVID data, so I wrote an app to scrape that
+    data, save it, and display it with a React app
+id: ritcoviddashboard
+---
+
+<article>
+    <h1 id='project'>RIT COVID Dashboard
+        <span class="projlink"><a
+                href="https://ritcoviddashboard.com">https://ritcoviddashboard.com</a></span>
+    </h1>
+    <hr />
+    <p>
+        Tracking and graphing historical data is fun and useful for showing trends in data, but RIT provides no
+        historical data. However, our COVID dashboard only shows immediate numbers, with no ways of tracking or
+        seeing trends. I wrote a Python app that scrapes data in real time from the dashboard and provides an
+        API to access current data in JSON format or historical data. Scraping the site is easy enough, and to
+        make it easier I used code from the
+        <a href="https://github.com/bug-chasers/ritcovid">RIT COVID Tracking Discord Bot</a>, which pulls data
+        in real time from the dashboard for a few Discord servers.
+    </p>
+    <p>
+        Once that data is retrieved, it's inserted into a SQLite database. However, because the dashboard is
+        updated incrementally, when they updated the dashboard I'd get between 2 and 10 new entries in the
+        database. This becomes massively inconvenient, because each day can have multiple entries and it's just
+        messy. To avoid this, every time the database is updated, if there's any previous entries on the same
+        date, those entries are dropped and only the latest entry is retained.
+    </p>
+    <h2>API</h2>
+    <hr />
+    <p>
+        Two endpoints are exposed to access this data at the moment, though as the semester changes more may be
+        created.
+    </p>
+    <p>
+        The first is <code><a href="https://ritcoviddashboard.com/api/v0/latest">/api/v0/latest</a></code
+        >, which simply shows the current state of the dashboard (with a delay of up to 5 minutes) in JSON
+        format for easy consuption by any other apps that don't want to parse the HTML from the page.
+    </p>
+    <p>The schema for this endpoint is as follows:</p>
+    <pre>
+{
+"alert_level": "String",
+"beds_available": int,
+"isolation_off_campus": int,
+"isolation_on_campus": int,
+"last_updated": "ISO-8601 String",
+"new_staff": int,
+"new_students": int,
+"quarantine_off_campus": int,
+"quarantine_on_campus": int,
+"tests_administered": int,
+"total_staff": int,
+"total_students": int
+}</pre
+    >
+    <p>
+        The other endpoint is
+        <code><a href="https://ritcoviddashboard.com/api/v0/history">/api/v0/history</a></code
+        >, which contains all the historical data from the year. It will return a array of Objects as defined in
+        the above schema.
+    </p>
+    <p>
+        For most of the dates in the history endpoint, you'll notice the time is <code>16:00:00</code> on all
+        entries. This is because I wrote the app partway through the fall semester so I had to backfill it with
+        data that was sourced from the <a href="https://reddit.com/r/rit">r/rit</a> community.
+    </p>
+    <p>
+        As always, the source code for the scraper and API is available
+        <a href="https://github.com/galenguyer/rit-covid-poller">on GitHub!</a>
+    </p>
+    <h2>Dashboard</h2>
+    <hr />
+    <p>
+        Given the simplicity of the official
+        <a href="https://www.rit.edu/ready/dashboard">RIT Ready Dashboard</a>, I decided it would be possible to
+        take the data I scraped and present it with additional statistics. I built
+        <a href="https://ritcoviddashboard.com">an unofficial dashboard</a> which uses the history endpoint to
+        provide changes over time along with the current numbers, as well as graphs. There is also the option to
+        show data from only the current semester or show data from the start of the Fall 2020 semester.
+    </p>
+    <p>
+        The source code for the dashboard is available
+        <a href="https://github.com/galenguyer/rit-covid-dashboard">on GitHub</a> as well!
+    </p>
+</article>
