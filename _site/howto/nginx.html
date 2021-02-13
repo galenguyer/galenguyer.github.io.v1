@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.galenguyer.com/assets/css/book.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="code.css" media="screen" />
+    <title>Install and Configure Nginx</title>
+</head>
+
+<body>
+    <article>
+        <h1>Install and Configure Nginx</h1>
+        <hr>
+        <ol>
+            <li>
+                <p>You can either install nginx using your favorite package manager, or build the latest release with OpenSSL using <a href="build-nginx.sh">this script</a>, courtesy of <a href="https://seedno.de/">Seednode</a>.</p>
+                <p>If you use the script, you will have to install the following dependencies (as of Ubuntu 18.04):</p>
+                <pre>sudo apt-get install build-essential golang zlib1g-dev libcurl4-openssl-dev libpcre3-dev -y</pre>
+                <p>Also, install certbot-auto with the following commands</p>
+                <pre>sudo wget https://dl.eff.org/certbot-auto -O /usr/local/bin/certbot-auto
+sudo chmod a+x /usr/local/bin/certbot-auto</pre>
+            </li>
+            <li>
+                <p>Enter the <code>/etc/nginx/</code> directory to set up nginx. You will need root permissions to modify or create flies in this directory. It will be populated with a few basic config files as well as default versions for all of them, which you can choose to keep or remove with <code>rm *default</code>.</p>
+            </li>
+            <li>
+                <p>Create three directories, <code>sites-available</code>, <code>sites-enabled</code>, and <code>ssl</code>.</p>
+                <pre>sudo mkdir -p /etc/nginx/{sites-available,sites-enabled,ssl}</pre>
+                <p>Modify your <code>nginx.conf</code> to include all files in the <code>sites-enabled</code> directory that end with conf. An example <code>nginx.conf</code> is below</p>
+                <pre><b>/etc/nginx/nginx.conf</b>
+                <hr>
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+	worker_connections 768;
+}
+
+http {
+	# Basic Settings
+	sendfile on;
+	tcp_nopush on;
+	tcp_nodelay on;
+	keepalive_timeout 65;
+	types_hash_max_size 2048;
+	gzip on;
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_comp_level 6;
+	gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;
+
+	include /etc/nginx/mime.types;
+	default_type application/octet-stream;
+
+	# Logging Settings
+	error_log /var/log/nginx/error.log;
+
+	# Virtual Host Configs
+	include /etc/nginx/sites-enabled/*.conf;
+}</pre>
+            </li>
+            <li>
+                <p>Go into your <code>ssl</code> directory and create the following <code>params.conf</code></p>
+                <pre><b>/etc/nginx/ssl/params.conf</b>
+                <hr>
+# disable insecure SSL implementations and ciphers
+ssl_protocols TLSv1.2 TLSv1.3;
+ssl_prefer_server_ciphers on;
+ssl_ecdh_curve secp384r1;
+# ssl_ciphers 'TLS13-CHACHA20-POLY1305-SHA256:TLS13-AES-256-GCM-SHA384:TLS13-AES-128-GCM-SHA256:EECDH+CHACHA20:AES256+EECDH:AES256+EDH:!aNULL';
+ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
+
+# disable ssl session tickets to ensure perfect forward secrecy
+ssl_session_cache shared:ssl_session_cache:10m;
+ssl_session_timeout 1m;
+ssl_session_tickets off;
+
+# block clickjacking attacks
+add_header X-Frame-Options sameorigin;
+
+# disable content-type sniffing
+add_header X-Content-Type-Options nosniff;
+
+# force-enable cross-site scripting protection
+add_header X-XSS-Protection "1; mode=block";
+
+# enable HSTS
+add_header Strict-Transport-Security "max-age=63072000";
+
+ssl_dhparam /etc/nginx/ssl/dhparam.pem;
+
+# enable oscp stapling
+ssl_stapling on;
+ssl_stapling_verify on;
+resolver 8.8.8.8;
+
+# enable referrer policy
+add_header Referrer-Policy "strict-origin";
+# enable feature policy
+add_header Feature-Policy "geolocation 'none'; midi 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; fullscreen 'self'; payment 'none'";</pre>
+            </li>
+            <li>
+                <p>Use OpenSSL to generate your Diffie-Hellman Parameters with the following command. Please note, if the folder doesn't exist or it cannot create the file for any reason, the command will run for a while and only display an error when it finishes.</p>
+                <pre>sudo openssl dhparam -out /etc/nginx/ssl/dhparam.pem 4096</pre>
+            </li>
+            <li>
+                <p>Any time you modify configurations like you've done, run the following commands</p>
+                <p>To test that the changes you've made are valid, run the following. If it reports any errors, fix them and run it again</p>
+                <pre>sudo nginx -t</pre>
+                <p>Once the above commands reports the configuration being OK, run the following</p>
+                <pre>sudo systemctl reload nginx</pre>
+            </li>
+            <li>
+                <p>Now that your basic SSL configuration is done, go to your <code>/etc/nginx/sites-available/</code> to create the server configuration. Then, symlink it to your <code>sites-enabled</code> directory so it's loaded by nginx. The following configuration is just for setting up SSL. After you obtain an SSL certificate, you'll modify the configuration to be secure</p>
+                <pre><b>/etc/nginx/sites-available/galenguyer.com.conf</b>
+                <hr>
+server {
+        listen 80;
+        listen [::]:80;
+        server_name galenguyer.com;
+        root /var/www/html;
+}</pre>
+                <pre>sudo ln -s /etc/nginx/sites-available/galenguyer.com.conf /etc/nginx/sites-enabled/galenguyer.com.conf</pre>
+                <p>Make sure to use the full paths and not relative paths for the symlink</p>
+            </li>
+
+            <li>
+                <p>Use the following command to obtain an SSL certificate from LetsEncrypt</p>
+                <pre>certbot-auto certonly --webroot -w /var/www/html/ -d galenguyer.com --rsa-key-size 4096</pre>
+                <p>Once this completes, you will have the certificates in <code>/etc/letsencrypt/live/galenguyer.com</code>. You'll have to renew them using the same command every 90 days.</p>
+            </li>
+            <li>
+                <p>Finally, modify the server configuration for HTTPS</p>
+                <pre><b>/etc/nginx/sites-available/galenguyer.com.conf</b>
+                <hr>
+server {
+    listen 80;
+    listen [::]:80;
+    server_name galenguyer.com;
+    return 301 https://$host$request_uri;
+}
+server {
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+
+	charset utf-8;
+
+	include /etc/nginx/ssl/params.conf;
+	ssl_certificate /etc/letsencrypt/live/galenguyer.com/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/galenguyer.com/privkey.pem;
+	
+	server_name galenguyer.com;
+
+	add_header 'Access-Control-Allow-Origin' *;
+
+	root /var/www/html;
+
+	location / {
+		# Add index.php to the list if you are using PHP
+		index index.html index.htm index.nginx-debian.html;
+
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ $uri.html $uri.htm  =404;
+	}
+
+	location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
+		expires 30d;
+		add_header Pragma public;
+		add_header Cache-Control "public";
+	}
+}</pre>
+            </li>
+            <li>
+                <p>To add another domain, just repeat steps 7 through 9, modifying names and locations as needed.</p>
+            </li>
+        </ol>
+        <hr>
+        <p>If you want to enable PHP, install it by running</p>
+        <pre>sudo apt install php7.2-fpm</pre>
+        <p>Then, add the following block to your server configuration</p>
+        <pre>location ~ \.php$ {
+	include /etc/nginx/snippets/fastcgi-php.conf;
+
+	# With php-fpm (or other unix sockets):
+	fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+	# With php-cgi (or other tcp sockets):
+	# fastcgi_pass 127.0.0.1:9000;
+}</pre>
+        <p>If you are missing your <code>/etc/nginx/snippets/fastcgi-php.conf</code>, you can use the following</p>
+        <pre><b>/etc/nginx/snippets/fastcgi-php.conf</b>
+                <hr>
+# regex to split $uri to $fastcgi_script_name and $fastcgi_path
+fastcgi_split_path_info ^(.+\.php)(/.+)$;
+
+# Check that the PHP script exists before passing it
+try_files $fastcgi_script_name =404;
+
+# Bypass the fact that try_files resets $fastcgi_path_info
+# see: http://trac.nginx.org/nginx/ticket/321
+set $path_info $fastcgi_path_info;
+fastcgi_param PATH_INFO $path_info;
+
+fastcgi_index index.php;
+include fastcgi.conf;</pre>
+        <hr>
+    </article>
+</body>
+
+</html>

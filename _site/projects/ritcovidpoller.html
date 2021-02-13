@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/main.css">
+  <meta name="author" content="Galen Guyer">
+  <title>Galen Guyer | RIT COVID Poller</title>
+  <meta name="description" content="Rochester Institute of Technology doesn't provide access to any historical COVID data, so I wrote an app to scrape that data and save it" />
+  </head>
+
+  <body>
+    <main class="wrapper" id="container">
+      <header class="header" role="banner">
+    <div class="brand">
+        <h1 class="name"><a href="/">Galen Guyer</a></h1>
+    <span class="description">Full-Stack Software Engineer</span>
+</div>
+    <nav class="navbar">
+    <ul>
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/genericbot/">GenericBot</a>
+        </li>
+        <li>
+            <a href="/cdn/">CDN</a>
+        </li>
+        <li>
+            <a href="/projects/">Other Projects</a>
+        </li>
+        <li>
+            <a href="/blog/">Blog</a>
+        </li>
+    </ul>
+</nav>
+</header>
+
+      <article>
+    <h1 id='project'>RIT COVID Poller
+        <span class="projlink"><a
+                href="https://rcpoller.galenguyer.com/api/v0/history">https://rcpoller.galenguyer.com</a></span>
+    </h1>
+    <p>Tracking and graphing historical data is fun and useful for showing trends in data, but RIT provides no
+        historical data. However, our COVID dashboard only shows immediate numbers, with no ways of tracking or seeing
+        trends. I wrote a Python app that scrapes data in real time from the dashboard and provides an API to access
+        current data in JSON format or historical data. Scraping the site is easy enough, and to make it easier I used
+        code from the <a href="https://github.com/bug-chasers/ritcovid">RIT COVID Tracking Discord Bot</a>, which pulls
+        data in real time from the dashboard for a few Discord servers.</p>
+    <p>Once that data is retrieved, it's inserted into a SQLite database. However, because the dashboard is updated
+        incrementally, when they updated the dashboard I'd get between 2 and 10 new entries in the database. This
+        becomes massively inconvenient, because each day can have multiple entries and it's just messy. To avoid this,
+        every time the database is updated, if there's any previous entries on the same date, those entries are dropped
+        and only the latest entry is retained.</p>
+    <p>Two endpoints are exposed to access this data at the moment, though as the semester changes more may be created.
+        The first is <a href="https://rcpoller.galenguyer.com/api/v0/latest">/api/v0/latest</a>, which simply shows the
+        current state of the dashboard (with a delay of up to 5 minutes) in JSON format for easy consuption by any other
+        apps that don't want to parse the HTML from the page. The other endpoint is <a
+            href="https://rcpoller.galenguyer.com/api/v0/history">/api/v0/history</a>, which contains all the historical
+        data from the semester.</p>
+    <p>For most of the dates in the history endpoint, you'll notice the time is <code>16:00:00</code> on all entries.
+        This is because I wrote the app partway through the semester so I had to backfill it with data that was sourced
+        from the <a href="https://reddit.com/r/rit">r/rit</a> community.</p>
+    <p>As always, the source code for this project is available <a
+            href="https://github.com/galenguyer/rit-covid-poller">on GitHub!</a></p>
+</article>
+      <footer>
+    <a class="card" href="https://github.com/galenguyer">
+        <span><i class="fab fa-github"></i> <span class="val">galenguyer</span></span>
+    </a>
+    <a class="card" href="mailto:galen@galenguyer.com">
+        <span><i class="fas fa-envelope"></i> <span class="val">galen@galenguyer.com</span></span>
+    </a>
+    <a class="card" href="https://linkedin.com/in/galenguyer">
+        <span><i class="fab fa-linkedin"></i> <span class="val">galenguyer</span></span>
+    </a>
+    <div style='width: 100%; text-align: center; display: block;'>
+    <div class='copy'>&copy; 2020 Galen Guyer (<a href="https://github.com/galenguyer/galenguyer.github.io"><i class="fab fa-github"></i> Source)</a></div>
+    </div>
+</footer>
+<div id="rainbow">
+    <span class="color" style="background-color: #FF0018;"></span>
+    <span class="color" style="background-color: #FFA52C;"></span>
+    <span class="color" style="background-color: #FFFF41;"></span>
+    <span class="color" style="background-color: #008018;"></span>
+    <span class="color" style="background-color: #0000F9;"></span>
+    <span class="color" style="background-color: #86007D;"></span>  
+</div>
+    </main>
+  </body>
+</html>

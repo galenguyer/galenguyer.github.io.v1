@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/main.css">
+  <meta name="author" content="Galen Guyer">
+  <title>Jensen Belongs To The Nords</title>
+  <meta name="description" content="On Thursday, Jan 23, Datadog reported high CPU usage for Jensen, a GPU-focused user machine. It turned out, we'd been pwned! I decided to investigate exactly what happened." />
+  </head>
+
+  <body>
+    <main class="wrapper" id="container">
+      <header class="header" role="banner">
+    <div class="brand">
+        <h1 class="name"><a href="/">Galen Guyer</a></h1>
+    <span class="description">Full-Stack Software Engineer</span>
+</div>
+    <nav class="navbar">
+    <ul>
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/genericbot/">GenericBot</a>
+        </li>
+        <li>
+            <a href="/cdn/">CDN</a>
+        </li>
+        <li>
+            <a href="/projects/">Other Projects</a>
+        </li>
+        <li>
+            <a href="/blog/">Blog</a>
+        </li>
+    </ul>
+</nav>
+</header>
+
+      <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Jensen Belongs To The Nords</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-01-28T00:00:00-05:00" itemprop="datePublished">Jan 28, 2020
+      </time><span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="post-author" itemprop="name"> - by <b>Galen Guyer</b></span></span></p>
+  </header>
+  <div class="post-content" itemprop="articleBody">
+    <h3 id="summary">Summary</h3>
+<p>On Thursday, Jan 23, Datadog reported high CPU usage for Jensen. I was running some stuff on it at the time so was wondering if my job was causing the high usage. <code>htop</code> showed some impact by my job, with the majority if CPU usage being a script or executable called <code>./cron</code> run by user <code>testing</code>. I remarked on the high CPU usage at the time but assumed it was an RTP testing something. This was later recognized as being not the case, leading to jensen being shut down and wiped.</p>
+
+<h3 id="impact">Impact</h3>
+<p>Nine remote connections to the testing account on jensen were logged. The primary attack, which we noticed and was the last logged connection, was a 3 part attack: A bitcoin miner (which threw the CPU usage alert), a perl script, and an ssh bruteforcing binary. This attack likely had no impact on user data. The previous connection, which was from the same IP three minutes prior, left a file named <code>/tmp/up.txt</code> that contained what intially appeared to be the username and password of the testing user, however whether or not this is correct is unknown. It then attempted to change the password with <code>passwd</code>, which failed because we use Kerberos/FreeIPA. The impacts of the other connections are unknown at this time.</p>
+
+<h3 id="what-happened">What Happened</h3>
+<p>The malware left several files behind in the <code>/users/u99/testing/</code> (which will be referred to as <code>~/</code>) and <code>/tmp/</code>, as well as altering the testing user's <a href="/assets/jensen-crontab.txt">crontab.</a> Unsurprisingly, <code>~/.bash_history</code> is empty, and won't provide any clues as to what happened. The first notable modification by the malware is adding a public key to ~/.ssh/authorized_keys. This key had the comment <code>mdrfckr</code>. When googled, the first result for this word is a <a href="https://ubuntuforums.org/showthread.php?t=2395684">post on the Ubuntu forums</a> with the same public key as we had. The <a href="https://askubuntu.com/questions/1161003/strange-cron-job-takes-up-100-of-cpu-ubuntu-18-lts-server">second result</a> is about a cron job taking up 100% of CPU usage on an Ubuntu 18 server. Both posts were several months to a year old but matched what happened. There was also a <code>cron.d</code> file in <code>~/bashtemp/</code>, which contained some odd lines. These lines were very similar to ones found in both posts and pointed to a few files and folders. Looking into these folders provided some more clues</p>
+<p>The first folder pointed to by the crontab on our machine was <code>~/.bashtemp/a/</code>. <code>.bashtemp</code>, starting with a <code>.</code> (period), is hidden from normal ls, and we see this being a common trend with other folders used by this malware. <code>ls -a</code> will show these hidden folders. Inspecting <code>~/.bashtemp/a/</code> shows two ELF binaries and four shell scripts. One of those binaries is named <code>cron</code>, the same name as the original suspicious process. Seeing as this was a common infection, I uploaded the cron binary to VirusTotal.com. <a href="https://www.virustotal.com/gui/file/fd9007df08c1bd2cf47fb97443c4d7360e204f4d8fe48c5d603373b2b2975708">VirusTotal quickly recognized it</a> as a Bitcoin miner. Some also recognized it as a trojan. VirusTotal also linked to <a href="https://www.joesandbox.com/analysis/202041/0/html">a report from joesandbox.com</a>, which also classified it as a miner/trojan. The other binary in the folder, named anacron, was classified the same, with the other files being shell scripts used to set up and run the miner. </p>
+<p>The next folder to look at was <code>~/.bashtemp/b/</code>. This contained 4 shells scripts, 3 of which looked similar with the purpose of setting up and running the file run. This file was a bit of an anomaly. The last line is the one that set the ssh key we found by forcibly removing the <code>~/.ssh</code> folder and adding the mdrfckr key as the only allowed key. This is presumably to make it harder for administrators to access the server and would be effective on a single-user machine that only allows public key login, however that wasn't an issue given the nature of jensen. It also contained a large block of base64 text, which it then decoded and passed to perl. Decoding this base64 showed an exec call to a obfuscated perl script. <a href="https://www.virustotal.com/gui/file/8651cdfa07da5b01b82f04d145de85be08ed981c99f5a39e91e7fe0fca0d9d7b/detection">VirusTotal</a> and <a href="https://www.joesandbox.com/analysis/202039/0/html">JoeSandbox</a> both recognize it as a trojan/shellbot, with one engine labeling it an IRC bot. Curiously, it appears to be written in Portugese.</p>
+<p>The last place pointed to by the crontab was <code>/tmp/.X19-unix/</code>. This folder name varies the most among reports of similar malware but the <code>/tmp/.X[NUBMER]-unix</code> trend matches. This contained the hidden folder <code>.rsync</code> as well as a file called <code>dota3.tar.gz</code>, which just contained the compressed contents of the <code>.rsync</code> folder. The <code>.rsync</code> folder contained a few setup scripts similar to what we saw earlier as well as 3 folders, named <code>a</code>, <code>b</code>, and <code>c</code>. <code>a</code> and <code>b</code> had similar contents to the ones we saw in testing's homedir, but the <code>c</code> folder is new. The contents are familar, several setup scripts and some binaries. These binaries are new and follow a naming trend. The setup scripts show that each binary is the same program, just compiled for different architectures. The setup scripts select and run the one for the current architecture. <a href="https://www.virustotal.com/gui/file/86fb767e01d1fd17f7b289b67aefcf3c04882e4d41620c7b4e72018afb482ca4/detection">VirusTotal reports these binaries</a> as backdoor/bruteforce programs, which matches <a href="https://blog.trendmicro.com/trendlabs-security-intelligence/outlaw-hacking-groups-botnet-observed-spreading-miner-perl-based-backdoor/">a report by trendmicro.com</a>, who report similar file structures and names.</p>
+<p>Once I had a decent understanding of the files on jensen, I looked through the <a href="/assets/jensen-auth.txt">authentication logs</a> to try to find where the attacker was coming from. There was a theory that the public key we found was left over from when 24ball was compromized, but several things indicate this to not be the case. First off, the scripts found in <code>~/.bashtemp/b/</code> are responsible for overwriting all keys in <code>~/.ssh/authorized_keys</code> and replacing them with its own. The key found in <code>~/.ssh/authorized_keys</code> matches the key found in the script. Furthermore, I inspected the authentication logs and found nine password logins for the user testing in the past 14 days[7] (Since January 13). There are no logins since Jan. 13 to the testing user using an SSH key. The exploitation of a weak password is further backed up by the fact jensen doesn't mount ceph - even if a publickey was dropped on 24ball when it was compromised, jensen wouldn't have that key. </p>
+<p>Out of the nine connections, there was one that seems likely to be the one that introduced the malware we noticed. I was able to correlate these by checking the file creation time of the <code>dota3.tar.gz</code> file, which <code>ls -l</code> reported to be <code>Jan 19 23:53</code>. The last connection we logged was initiated at <code>Jan 19 23:53:29</code> and lasted for under 1 second. The originating IP points to a server from a small provider in the Netherlands. The server is not responding on any port now. The other IPs point to Indonesia, Vietnam, Singapore, and New Jersey and all respond on various standard ports. Some of those connections attempted to change the password (with <code>passwd</code>) but because we use Kerberos/FreeIPA, these attempts failed. Whether or not any of these connections did anything else is unknown.</p>
+
+  </div>
+</article>
+
+      <footer>
+    <a class="card" href="https://github.com/galenguyer">
+        <span><i class="fab fa-github"></i> <span class="val">galenguyer</span></span>
+    </a>
+    <a class="card" href="mailto:galen@galenguyer.com">
+        <span><i class="fas fa-envelope"></i> <span class="val">galen@galenguyer.com</span></span>
+    </a>
+    <a class="card" href="https://linkedin.com/in/galenguyer">
+        <span><i class="fab fa-linkedin"></i> <span class="val">galenguyer</span></span>
+    </a>
+    <div style='width: 100%; text-align: center; display: block;'>
+    <div class='copy'>&copy; 2020 Galen Guyer (<a href="https://github.com/galenguyer/galenguyer.github.io"><i class="fab fa-github"></i> Source)</a></div>
+    </div>
+</footer>
+<div id="rainbow">
+    <span class="color" style="background-color: #FF0018;"></span>
+    <span class="color" style="background-color: #FFA52C;"></span>
+    <span class="color" style="background-color: #FFFF41;"></span>
+    <span class="color" style="background-color: #008018;"></span>
+    <span class="color" style="background-color: #0000F9;"></span>
+    <span class="color" style="background-color: #86007D;"></span>  
+</div>
+    </main>
+  </body>
+</html>

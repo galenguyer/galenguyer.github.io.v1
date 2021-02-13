@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/main.css">
+  <meta name="author" content="Galen Guyer">
+  <title>Galen Guyer | CDN</title>
+  <meta name="description" content="I build a personal CDN that outperforms Cloudflare! This is how (and why)" />
+  </head>
+
+  <body>
+    <main class="wrapper" id="container">
+      <header class="header" role="banner">
+    <div class="brand">
+        <h1 class="name"><a href="/">Galen Guyer</a></h1>
+    <span class="description">Full-Stack Software Engineer</span>
+</div>
+    <nav class="navbar">
+    <ul>
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/genericbot/">GenericBot</a>
+        </li>
+        <li>
+            <a class="active">CDN</a>
+        </li>
+        <li>
+            <a href="/projects/">Other Projects</a>
+        </li>
+        <li>
+            <a href="/blog/">Blog</a>
+        </li>
+    </ul>
+</nav>
+</header>
+
+      <article>
+    <h3>Inspiration</h3>
+    <p>Why did I do this? Well, I read <a href="https://pasztor.at/blog/building-your-own-cdn">this article</a> and thought it looked neat. Then, a friend built one, following that blog. I had $150 per month in Azure credit from interning at Microsoft, so I decided to replicate it in Azure.</p>
+    <p>This site and <a href='//cdn.galenguyer.com'>cdn.galenguyer.com</a> are both hosted on this CDN for high speed and availability.</p>
+    
+    <h3>Architecture</h3>
+    <p>The CDN consists of <a href='https://cdn.galenguyer.com/img/nodes.png'>seven edge nodes</a>. The Master server is located at RIT and is not reachable though the CDN. It servers as a coordinator for the edge nodes. The edge nodes are Standard B1ls Virtual Machines with 1 vCPU, 0.5GB of RAM, and 32GB of SSD storage.</p>
+    <p>The scripts used for management can be located <a href='https://git.galenguyer.com/chef/cdn-configs'>on my git instance.</a> They are responsible for ensuring packages are installed and up to date, configurations are synced and applied, and static files are up to date on the edge servers.</p>
+    <p>A <a href="https://azure.microsoft.com/en-us/services/traffic-manager/">Traffic Manager</a> configured to route based off geographic location ensures users get the nearest server, and handles failover in the event a server goes down.</p>
+
+    <h3>Speed</h3>
+    <p>I tested the CDN with <a href="https://latency.apex.sh/?url=galenguyer.com&compare=elite.tips">apex.sh's latency tester.</a> <a href="https://elite.tips">elite.tips</a> is backed by cloudflare, and my CDN is comparable in most regions. For a system that I built for fun, I'm very happy with that.</p>
+</article>
+      <footer>
+    <a class="card" href="https://github.com/galenguyer">
+        <span><i class="fab fa-github"></i> <span class="val">galenguyer</span></span>
+    </a>
+    <a class="card" href="mailto:galen@galenguyer.com">
+        <span><i class="fas fa-envelope"></i> <span class="val">galen@galenguyer.com</span></span>
+    </a>
+    <a class="card" href="https://linkedin.com/in/galenguyer">
+        <span><i class="fab fa-linkedin"></i> <span class="val">galenguyer</span></span>
+    </a>
+    <div style='width: 100%; text-align: center; display: block;'>
+    <div class='copy'>&copy; 2020 Galen Guyer (<a href="https://github.com/galenguyer/galenguyer.github.io"><i class="fab fa-github"></i> Source)</a></div>
+    </div>
+</footer>
+<div id="rainbow">
+    <span class="color" style="background-color: #FF0018;"></span>
+    <span class="color" style="background-color: #FFA52C;"></span>
+    <span class="color" style="background-color: #FFFF41;"></span>
+    <span class="color" style="background-color: #008018;"></span>
+    <span class="color" style="background-color: #0000F9;"></span>
+    <span class="color" style="background-color: #86007D;"></span>  
+</div>
+    </main>
+  </body>
+</html>

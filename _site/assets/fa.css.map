@@ -1,0 +1,16 @@
+{
+	"version": 3,
+	"file": "fa.css",
+	"sources": [
+		"fa.scss",
+		"_sass/fa.scss",
+		"_sass/fontawesome/fa-used.scss"
+	],
+	"sourcesContent": [
+		"@import \"fa\";",
+		"$fa-font-path: \"/assets/fa\";\r\n\r\n@import \"fontawesome/fa-used.scss\";\r\n",
+		"/*!\r\n * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com\r\n * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)\r\n */\r\n\r\n//@import 'variables'; \r\n$fa-font-path:         \"../webfonts\" !default;\r\n$fa-font-size-base:    16px !default;\r\n$fa-font-display:      block !default;\r\n$fa-css-prefix:        fa !default;\r\n$fa-version:           \"5.13.0\" !default;\r\n$fa-border-color:      #eee !default;\r\n$fa-inverse:           #fff !default;\r\n$fa-li-width:          2em !default;\r\n$fa-fw-width:          (20em / 16);\r\n$fa-primary-opacity:   1 !default;\r\n$fa-secondary-opacity: .4 !default;\r\n\r\n// Convenience function used to set content property\r\n@function fa-content($fa-var) {\r\n  @return unquote(\"\\\"#{ $fa-var }\\\"\");\r\n}\r\n$fa-var-github: \\f09b;\r\n$fa-var-linkedin: \\f08c;\r\n$fa-var-envelope: \\f0e0;\r\n//end @import 'variables';\r\n//@import 'icons';\r\n.#{$fa-css-prefix}-github:before { content: fa-content($fa-var-github); }\r\n.#{$fa-css-prefix}-linkedin:before { content: fa-content($fa-var-linkedin); }\r\n.#{$fa-css-prefix}-envelope:before { content: fa-content($fa-var-envelope); }\r\n//end @import 'icons';\r\n\r\n@font-face {\r\n  font-family: 'Font Awesome 5 Compact';\r\n  font-style: normal;\r\n  font-weight: 400;\r\n  font-display: $fa-font-display;\r\n  src: url('#{$fa-font-path}/fa-compact.woff2') format('woff2');\r\n}\r\n\r\n.fab, .fas {\r\n  font-family: 'Font Awesome 5 Compact';\r\n  font-weight: 400;\r\n}\r\n"
+	],
+	"names": [],
+	"mappings": "AEAA,kLAGG;AAHH,AA2BA,UA3BU,CAAC,MAAM,CA2Ba,EAAE,OAAO,EAP7B,OAAmC,GAO0B;;AA3BvE,AA4BA,YA5BY,CAAC,MAAM,CA4Ba,EAAE,OAAO,EAR/B,OAAmC,GAQ8B;;AA5B3E,AA6BA,YA7BY,CAAC,MAAM,CA6Ba,EAAE,OAAO,EAT/B,OAAmC,GAS8B;;AAG3E,UAAU,GACR,WAAW,EAAE,wBAAwB,EACrC,UAAU,EAAE,MAAM,EAClB,WAAW,EAAE,GAAG,EAChB,YAAY,EA5BS,KAAK,EA6B1B,GAAG,EAAE,kCAAqD,CAAC,eAAe;;AAG5E,AAAA,IAAI,EAAE,IAAI,CAAC,EACT,WAAW,EAAE,wBAAwB,EACrC,WAAW,EAAE,GAAG,GACjB"
+}

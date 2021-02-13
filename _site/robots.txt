@@ -1,0 +1,7 @@
+User-agent: *
+Disallow:
+Allow: /
+Allow: /genericbot/
+Allow: /genericbot/v3
+Allow: /cdn
+Allow: /projects

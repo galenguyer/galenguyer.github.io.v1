@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.galenguyer.com/assets/css/book.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="code.css" media="screen" />
+    <title>Backup YouTube Likes</title>
+</head>
+
+<body>
+    <article>
+        <h1>Backup YouTube Liked Videos with youtube-dl</h1>
+        <hr>
+        <ol>
+            <li>
+                <p>Start by installing the latest version of <a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a> with the following commands</p>
+                <pre>sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl</pre>
+                <p>If the last step doesn't work, you might have to install python2.7</p>
+                <pre>sudo apt install python</pre>
+            </li>
+            <li><p>Dump your cookies into a file youtube-dl can understand so it can authenticate with YouTube using <a href="https://addons.mozilla.org/en-US/firefox/addon/cookies-txt/">cookies.txt</a> for Firefox or <a href="https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg">cookies.txt</a> for Chrome</p></li>
+            <li>
+                <p>Make sure you are in the folder you want to save the videos into and then run the following command</p>
+                <pre>youtube-dl --cookies /path/to/cookies.txt --download-archive archive.txt --ignore-errors --yes-playlist [Link to your Liked Vidoes playlist]</pre>
+            </li>
+        </ol>
+        <hr>
+    </article>
+</body>
+
+</html>

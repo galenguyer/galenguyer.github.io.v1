@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/assets/main.css">
+  <meta name="author" content="Galen Guyer">
+  <title>Galen Guyer | Spotify Recent Plays</title>
+  <meta name="description" content="This is just a quick react app and backend to display the most recent songs I've played on spotify" />
+  </head>
+
+  <body>
+    <main class="wrapper" id="container">
+      <header class="header" role="banner">
+    <div class="brand">
+        <h1 class="name"><a href="/">Galen Guyer</a></h1>
+    <span class="description">Full-Stack Software Engineer</span>
+</div>
+    <nav class="navbar">
+    <ul>
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/genericbot/">GenericBot</a>
+        </li>
+        <li>
+            <a href="/cdn/">CDN</a>
+        </li>
+        <li>
+            <a href="/projects/">Other Projects</a>
+        </li>
+        <li>
+            <a href="/blog/">Blog</a>
+        </li>
+    </ul>
+</nav>
+</header>
+
+      <article>
+    <h1 id='spotify'>Spotify Recent Plays
+        <!-- <span class="projlink"><a href="https://galenguyer.com/spotify/">https://galenguyer.com/spotify/</a></span>-->
+    </h1>
+    <p>A small project to display the songs I've recently listened to on Spotify. It draws directly from the spotify
+        API using an ASP.NET app and displays it using a TypeScript/React app.</p>
+    <p>The backend API is written in ASP.NET Core. To build it, I started by learning how <a
+            href="https://oauth.net/2/">OAuth 2.0</a> works and implementing a client for it from scratch. It
+        redirects to the login page, and once the callback token is recieved, it exchanges it for the access and
+        refresh tokens. The client also automatically handles refreshing the tokens before they expire. In order to
+        prevent someone else from logging in and displaying their data instead, during the login flow I verify that
+        the email on the connecting account matches the one in the configuration. If it doesn't, the attempt is
+        thrown out.</p>
+    <p>The backend also scrapes YouTube to provide links to each song on the webpage. YouTube doesn't provide an API
+        so I was forced to extract the link from the search page with some regex. Once I get the search result the
+        first time, it gets saved so I don't have to spam YouTube with search requests every time someone loads the
+        page.</p>
+    <p>The frontend is my first foray into TypeScript and my second project with React. I chose TypeScript because
+        I'm handling complex objects and the type safety is useful. I found some requirements that TypeScript
+        imposes annoying at first, but overall, I prefer writing React with TypeScript because of the additional
+        safety. Getting Intellisense when using VS Code is a nice bonus as well.</p>
+    <p>As always, the source is available <a href="https://github.com/galenguyer/SpotifyRecent">on github.</a></p>
+</article>
+      <footer>
+    <a class="card" href="https://github.com/galenguyer">
+        <span><i class="fab fa-github"></i> <span class="val">galenguyer</span></span>
+    </a>
+    <a class="card" href="mailto:galen@galenguyer.com">
+        <span><i class="fas fa-envelope"></i> <span class="val">galen@galenguyer.com</span></span>
+    </a>
+    <a class="card" href="https://linkedin.com/in/galenguyer">
+        <span><i class="fab fa-linkedin"></i> <span class="val">galenguyer</span></span>
+    </a>
+    <div style='width: 100%; text-align: center; display: block;'>
+    <div class='copy'>&copy; 2020 Galen Guyer (<a href="https://github.com/galenguyer/galenguyer.github.io"><i class="fab fa-github"></i> Source)</a></div>
+    </div>
+</footer>
+<div id="rainbow">
+    <span class="color" style="background-color: #FF0018;"></span>
+    <span class="color" style="background-color: #FFA52C;"></span>
+    <span class="color" style="background-color: #FFFF41;"></span>
+    <span class="color" style="background-color: #008018;"></span>
+    <span class="color" style="background-color: #0000F9;"></span>
+    <span class="color" style="background-color: #86007D;"></span>  
+</div>
+    </main>
+  </body>
+</html>
