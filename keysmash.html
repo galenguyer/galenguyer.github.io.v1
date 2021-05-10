@@ -16,21 +16,21 @@
             font-weight: 300;
             height: 80vh
         }
-
+        
         #pad {
             height: 25vh;
         }
-
+        
         h1 {
             font-weight: 300;
         }
-
+        
         #buttons {
             display: inline-flex;
             flex-wrap: wrap;
             justify-content: center;
         }
-
+        
         button {
             background: inherit;
             color: rgba(248, 248, 242, 0.6);
@@ -46,14 +46,13 @@
             -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border 0.2s ease-in-out;
             transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border 0.2s ease-in-out;
         }
-
+        
         button:hover {
             background: rgba(248, 248, 242, 0.1);
             color: rgba(248, 248, 242, 0.8);
             border: 1.5px solid rgba(248, 248, 242, 0.8);
             border-radius: 16px;
         }
-
     </style>
 </head>
 
@@ -65,7 +64,7 @@
             <noscript>you need to enable javascript for this to work!</noscript>
         </p>
         <div id='buttons'>
-            <button onclick="generateSmash(18 + (Math.floor(Math.random()*24)));">generate a new one</button>
+            <button onclick="generateSmash(8 + (Math.floor(Math.random() * 12)))">generate a new one</button>
             <button onclick="copyElementText('keysmash');">copy to clipboard</button>
         </div>
         <script>
@@ -95,7 +94,7 @@
                 document.execCommand("copy");
                 document.body.removeChild(elem);
             }
-            generateSmash(18 + (Math.floor(Math.random() * 24)));
+            generateSmash(8 + (Math.floor(Math.random() * 12)));
         </script>
     </div>
 </body>
