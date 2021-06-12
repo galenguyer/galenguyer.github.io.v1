@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: galenguyer-com
+spec:
+  selector:
+    app: galenguyer-com
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: galenguyer-com
+spec:
+  selector:
+    matchLabels:
+      app: galenguyer-com
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: galenguyer-com
+    spec:
+      containers:
+      - name: galenguyer-com
+        image: docker.io/galenguyer/galenguyer.com:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: galenguyer-com
+spec:
+  rules:
+  - host: galenguyer.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: galenguyer-com
+            port:
+              number: 80
