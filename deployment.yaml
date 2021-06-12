@@ -30,6 +30,18 @@ spec:
         image: docker.io/galenguyer/galenguyer.com:latest
         ports:
         - containerPort: 80
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - galenguyer-com
+              topologyKey: "kubernetes.io/hostname"
+            weight: 100
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
