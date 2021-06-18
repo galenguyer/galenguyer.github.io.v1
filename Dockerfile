@@ -12,6 +12,4 @@ RUN bundle exec jekyll build
 
 FROM docker.io/galenguyer/nginx:alpine3.13.5-1.21.0
 
-WORKDIR /var/www/html/
-
-COPY --from=builder /usr/src/app/_site/ /var/www/html/
+COPY --from=builder /usr/src/app/_site/ /usr/share/nginx/html/

@@ -1,0 +1,73 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+title: Galen Guyer | GitHub
+permalink: /projects/github/
+layout: default
+description: Here are a few GitHub repos I've made or contributed to that I think are useful (or I want to remember)
+id: github
+---
+
+<article>
+    <h1>GitHub Repos</h1>
+    <p>sorted in no real order. this is mostly stuff i'm interested in maintaining-ish. some repos at the bottom are private. some are incomplete and may or may not be finished someday</p>
+    <hr>
+    <p><a href="https://github.com/galenguyer/dotfiles">dotfiles</a> - my dotfiles</p>
+    <p><a href="https://github.com/galenguyer/traefik">traefik</a> - my traefik configs for my main server. requires <a href="https://github.com/galenguyer/composer">composer</a> due to how files are fragmented</p>
+    <p><a href="https://github.com/galenguyer/composer">composer</a> - a c program to take many docker-compose.*.yaml files and pass them into docker-compose properly. written for <a href="https://github.com/galenguyer/traefik">traefik</a></p>
+    <p><a href="https://github.com/galenguyer/vigilant">vigilant</a> - a quick docker process monitor with a web ui</p>
+    <p><a href="https://github.com/galenguyer/flask-demo">flask-demo</a> - a template flask api using docker, gunicorn, and pipenv</p>
+    <p><a href="https://github.com/galenguyer/docker-nginx">docker-nginx</a> - build scripts for a minimalist nginx docker image</p>
+    <p><a href="https://github.com/galenguyer/reg">reg</a> - a fork of <a href="https://github.com/genuinetools/reg">genuinetools/reg</a>. changes made - tags are sorted by date on the web ui</p>
+    <p><a href="https://github.com/galenguyer/moby">moby</a> - a fork of <a href="https://github.com/moby/moby">moby/moby</a>. changes made - docker push checks authentication with a post request instead of a get, allowing for a proxy in front of a registry to auth pushed only with basic auth. built to work with <a href="https://github.com/galenguyer/docker-registry-proxy">docker-registry-proxy</a></p>
+    <p><a href="https://github.com/galenguyer/docker-registry-proxy">docker-registry-proxy</a> - an nginx reverse proxy made to sit in front of a selfhosted docker registry. uses http basic auth to authenticate pushes but not pulls. pushing requires a modified version of dockerd built from <a href="https://github.com/galenguyer/moby">galenguyer/moby</a>, but pulling can be done with any client</p>
+    <p><a href="https://github.com/galenguyer/kubernetes-terraform-azure">kubernetes-terraform-azure</a> - terraform definitions to spin up a number of servers in azure. i primarily use it for a kubernetes cluster</p>
+    <p><a href="https://github.com/galenguyer/kubernetes-ansible">kubernetes-ansible</a> - ansible playbook to install kubernetes on a debian 10 cluster. might work with other debian based operating systems but i've never tested it</p>
+    <p><a href="https://github.com/galenguyer/kubernetes-ops-scripts">kubernetes-ops-scripts</a> - scripts i use to make managing an ansible cluster a bit easier. probably not useful to you, they're very customized to my environment</p>
+    <p><a href="https://github.com/galenguyer/squirrel">squirrel</a> - a python script to send data from <a href="https://github.com/flightaware/dump1090">flightaware/dump1090</a> to mongodb</p>
+    <p><i><a href="https://github.com/galenguyer/once">once</a> - one time secret sharing</i></p>
+    <p><a href="https://github.com/galenguyer/docker-demo">docker-demo</a> - a 101 intro to docker, covering building a docker image and deploying with docker-compose</p>
+    <p><a href="https://github.com/galenguyer/rit-covid-dashboard">rit-covid-dashboard</a> - the frontend for the rit covid dashboard</p>
+    <p><a href="https://github.com/galenguyer/rit-covid-poller">rit-covid-poller</a> - the backend for the rit covid dashboard</p>
+    <p><a href="https://github.com/galenguyer/cdn-configs">cdn-config</a> - terraform and ansible files to deploy my cdn</p>
+    <p><a href="https://github.com/galenguyer/shant">shant</a> - hi. i'm a shant (for <a href="https://sauravmakes.tech">sauravmakes.tech</a></p>
+    <p><i><a href="https://github.com/galenguyer/photosink">photosink</a> - a static photo gallery generator</i></p>
+    <p><i><a href="https://github.com/galenguyer/gay">gay</a> - a cli tool to print a gay flag</i></p>
+    <p><i><a href="https://github.com/galenguyer/parse">parse</a> - a c library for parsing command line arguments</i></p>
+    <p><i><a href="https://github.com/galenguyer/test">test</a> - a lightweight test framework for c</i></p>
+    <p><a href="https://github.com/galenguyer/autohtpasswd">autohtpasswd</a> - generate an htpasswd file from /etc/passwd entries</p>
+    <p><a href="https://github.com/galenguyer/color">color</a> - let's make a color together!</p>
+    <p><i><a href="https://github.com/galenguyer/bingo">bingo</a> - bingo web app</i></p>
+    <p><a href="https://github.com/galenguyer/pubwebs">pubwebs</a> - an nginx docker image that mounts /home and displays user's public_html folders</p>
+    <p><a href="https://github.com/galenguyer/resume">resume</a> - my resume</p>
+    <p><a href="https://github.com/galenguyer/dr-ver">dr-ver</a> - a simple link shortener, written with love</p>
+    <p><a href="https://github.com/galenguyer/blaseball-streampanel">blaseball-streampanel</a> - a plain js single page app showing the latest feed from blaseball</p>
+    <p><i><a href="https://github.com/galenguyer/dice">dice</a> - a c program to parse a string and roll dice for it</i></p>
+    <p><a href="https://github.com/galenguyer/share">share</a> - a fork of <a href="https://github.com/schollz/share">schollz/share</a>. changes - properly displaying the error message on upload failure</p>
+    <p><a href="https://github.com/galenguyer/wg_conf">wg_conf</a> - a python library to manage a wireguard configuration file</p>
+    <p><a href="https://github.com/galenguyer/md5">md5</a> - a public domain implementation of md5 in c</p>
+    <p><a href="https://github.com/galenguyer/brute">brute</a> - md5 brute forcing in c</p>
+    <p><a href="https://github.com/galenguyer/md5-cuda">md5-cuda</a> - a public domain implementation of md5 in cuda</p>
+    <p><a href="https://github.com/galenguyer/brute-cuda">brute-cuda</a> - md5 brute forcing in cuda</p>
+    <p><a href="https://github.com/galenguyer/haddock">haddock</a> - a password generator based off csh haddock but written in go for wobscale</p>
+    <p><i><a href="https://github.com/galenguyer/clisp">clips</a> - a lisp written in c</i></p>
+    <p><a href="https://github.com/galenguyer/backup-scripts">backup-scripts</a> - bash scripts to back up stuff to google drive</p>
+    <p><a href="https://github.com/galenguyer/book.css">book.css</a> - a css file made to look kinda like a book but kinda clean</p>
+    <p><a href="https://github.com/galenguyer/pymarkov">pymarkov</a> - a markov chain library in python</p>
+    <p><a href="https://github.com/galenguyer/myipis">myipis</a> - a rust web app to get your current ip and other information</p>
+    <p><a href="https://github.com/galenguyer/debian-live-zfs">debian-live-zfs</a> - scripts to build a debian live image with zfs support</p>
+    <p><a href="https://github.com/galenguyer/docker-linx">docker-linx</a> - docker build instructions for <a href="https://github.com/andreimarcu/linx-server">andreimarcu/linx-server</a></p>
+    <p><a href="https://github.com/galenguyer/lyricscraper">lyricscraper</a> - a python tool to download lyrics from a couple websites</p>
+    <p><a href="https://github.com/galenguyer/nginx-demo">nginx-demo</a> - demo configs for nginx</p>
+    <p><a href="https://github.com/galenguyer/wg-vankey">wg-vankey</a> - a rust cli tool to generate wireguard public keys with a given prefix</p>
+    <p><i><a href="https://github.com/galenguyer/xkcd_api">xkcd_api</a> - a search api for xkcd</i></p>
+    <p><i><a href="https://github.com/galenguyer/ROBOT9000">ROBOT9000</a> - a rust implementation of xkcd's ROBOT9000 for discord</i></p>
+    <p><a href="https://github.com/galenguyer/SufjanAsAService">SufjanAsAService</a> - a markov chain generator in c# for sufjan stevens lyrics</p>
+    <p><a href="https://github.com/galenguyer/GenericBot">GenericBot</a> - a Discord bot I wrote a while back and maintain now that it's in over 50 servers. doesn't get much attention these days</p>
+
+    
+    <h3>Private Repos</h3>
+    <p><a href="https://github.com/galenguyer/bastion">bastion</a> - traefik configurations for my secure server, hosting things like my password manager (<a href="https://github.com/dani-garcia/vaultwarden">dani-garcia/vaultwarden</a></p>
+    <p><i><a href="https://github.com/galenguyer/sortapp">sortapp</a> - something to do with having a list and sorting it by comparing two items over and over</i></p>
+    <p><i><a href="https://github.com/galenguyer/march">march</a> - the infinite march</i></p>
+</article>
