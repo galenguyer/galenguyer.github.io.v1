@@ -9,20 +9,12 @@
             Home</a>
         </li>
         <li>
-            {% if page.id == "genericbot" -%}
+            {% if page.id == "github" -%}
             <a class="active">
             {%- else -%}
-            <a href="{{ '/projects/genericbot/' | relative_url }}">
+            <a href="{{ '/projects/github/' | relative_url }}">
             {%- endif -%}
-            GenericBot</a>
-        </li>
-        <li>
-            {% if page.id == "cdn" -%}
-            <a class="active">
-            {%- else -%}
-            <a href="{{ '/projects/cdn/' | relative_url }}">
-            {%- endif -%}
-            CDN</a>
+            GitHub</a>
         </li>
         <li>
             {% if page.id == "projects" -%}
